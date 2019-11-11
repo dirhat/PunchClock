@@ -23,6 +23,11 @@ public class Entry {
     @JoinColumn(nullable = false)
     private User user;
 
+    @JsonBackReference("category")
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Category category;
+
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @Column(nullable = false)
@@ -63,5 +68,13 @@ public class Entry {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
