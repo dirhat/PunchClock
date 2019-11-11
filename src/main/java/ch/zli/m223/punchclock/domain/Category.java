@@ -6,22 +6,18 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class User {
-
-    /*-- Class 'User' --*/
+public class Category {
+    /*-- Class 'Category' --*/
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String title;
 
-    @Column(nullable = false)
-    private String password;
-
-    @JsonManagedReference("user")
-    @OneToMany(mappedBy = "user")
+    @JsonManagedReference("category")
+    @OneToMany(mappedBy = "category")
     private List<Entry> entries;
 
     public Long getId() {
@@ -32,20 +28,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getTitle() {
+        return title;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public List<Entry> getEntries() {

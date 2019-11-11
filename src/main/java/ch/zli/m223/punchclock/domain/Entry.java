@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @Entity
 public class Entry {
 
+    /*-- Class 'Entry' --*/
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
