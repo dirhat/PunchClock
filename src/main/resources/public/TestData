@@ -1,0 +1,7 @@
+INSERT INTO user(username, password) VALUES('Max Muster', 'root');
+
+INSERT INTO text(message, user_id) VALUES('This is a TEST', 1);
+
+INSERT INTO category(title) VALUES('Test-Category');
+
+INSERT INTO entry(checkIn, checkOut, user_id, category_id) VALUES('2019-10-29T12:09:00.305Z', '2019-10-29T12:10:00.305Z', 1, 1);

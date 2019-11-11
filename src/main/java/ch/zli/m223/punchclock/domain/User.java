@@ -24,6 +24,10 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Entry> entries;
 
+    @JsonManagedReference("user")
+    @OneToMany(mappedBy = "user")
+    private List<Text> texts;
+
     public Long getId() {
         return id;
     }
@@ -54,5 +58,13 @@ public class User {
 
     public void setEntries(List<Entry> entries) {
         this.entries = entries;
+    }
+
+    public List<Text> getTexts() {
+        return texts;
+    }
+
+    public void setTexts(List<Text> texts) {
+        this.texts = texts;
     }
 }
