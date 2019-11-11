@@ -1,22 +1,34 @@
 package ch.zli.m223.punchclock.controller;
 
 import ch.zli.m223.punchclock.domain.User;
+import ch.zli.m223.punchclock.repository.UserRepository;
 import ch.zli.m223.punchclock.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Application;
 import java.util.List;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
     private UserService userService;
+    private UserRepository userRepository;
 
-    public UserController(UserService userService)
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public UserController(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder)
     {
         this.userService = userService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @GetMapping
@@ -30,11 +42,17 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public User getUserById(@PathVariable("id") long id){ return userService.getUserById(id); }
 
-    @PostMapping
+    /*@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@Valid @RequestBody User user)
     {
         return userService.createUser(user);
+    }*/
+
+    @PostMapping("/sign-up")
+    public void signUp(@RequestBody User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     @DeleteMapping

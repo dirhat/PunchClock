@@ -7,7 +7,7 @@ const checkLogin = (e) => {
     const formData = new FormData(e.target);
     const loginUser = {};
     loginUser['username'] = formData.get('loginUsername');
-    loginUser['password'] = formData.get('loginPassword');$
+    loginUser['password'] = formData.get('loginPassword');
 
     fetch(`${URL}/login`, {
         method: 'POST',
