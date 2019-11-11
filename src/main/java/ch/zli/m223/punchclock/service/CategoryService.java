@@ -1,54 +1,44 @@
 package ch.zli.m223.punchclock.service;
 
-import ch.zli.m223.punchclock.domain.User;
+import ch.zli.m223.punchclock.domain.Category;
+import ch.zli.m223.punchclock.repository.CategoryRepository;
+import ch.zli.m223.punchclock.repository.EntryRepository;
 import ch.zli.m223.punchclock.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService {
-    private UserRepository userRepository;
+public class CategoryService {
+    private CategoryRepository categoryRepository;
 
-    public UserService(UserRepository userRepository)
+    public CategoryService(CategoryRepository categoryRepository)
     {
-        this.userRepository = userRepository;
+        this.categoryRepository = categoryRepository;
     }
 
-    public User createUser(User user)
+    public Category createCategory(Category category)
     {
-        return userRepository.saveAndFlush(user);
+        return categoryRepository.saveAndFlush(category);
     }
 
-    public void deleteUser(long id)
+    public void deleteCategory(long id)
     {
-        userRepository.deleteById(id);
+        categoryRepository.deleteById(id);
     }
 
-    public User updateUser(User user)
+    public Category updateCategory(Category category)
     {
-        return userRepository.saveAndFlush(user);
+        return categoryRepository.saveAndFlush(category);
     }
 
-    public List<User> findAll()
+    public List<Category> findAll()
     {
-        return userRepository.findAll();
+        return categoryRepository.findAll();
     }
 
-    public boolean checkUser(String username, String password)
+    public Category getCategoryById(long id)
     {
-        List<User> allUsers = findAll();
-        for(User singleUser : allUsers){
-            if(singleUser.getUsername() == username && singleUser.getPassword() == password)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public User getUserById(long id)
-    {
-        return userRepository.getOne(id);
+        return categoryRepository.getOne(id);
     }
 }

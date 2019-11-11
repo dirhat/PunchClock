@@ -11,18 +11,18 @@ import static java.util.Collections.emptyList;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private UserRepository userRepository;
+    private UserRepository applicationUserRepository;
 
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserDetailsServiceImpl(UserRepository applicationUserRepository) {
+        this.applicationUserRepository = applicationUserRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
+        ch.zli.m223.punchclock.domain.User applicationUser = applicationUserRepository.findByUsername(username);
+        if (applicationUser == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new User(user.getUsername(), user.getPassword(), emptyList());
+        return new User(applicationUser.getUsername(), applicationUser.getPassword(), emptyList());
     }
 }
